@@ -5,6 +5,7 @@ Project in the development process.
 
 The application is based on the REST API architecture.
 
+
 ## Technologies
 * Java 8
  
