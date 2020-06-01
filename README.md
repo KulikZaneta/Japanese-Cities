@@ -20,7 +20,7 @@ The application is based on the REST API architecture.
 ## Build
 1. Clone and unpack application
 
-2. Clone and unpack Angular application -> https://github.com/KulikZaneta/Japanese-Cities-Angular
+2. Clone and unpack Angular application -> https://github.com/KulikZaneta/Japan-Cities-Angular
 
 ## Features
 * adding unit tests
