@@ -11,4 +11,5 @@ public interface JapaneseCityMapper {
     JapaneseCityDto japaneseCityToJapaneseCityDto(JapaneseCity japaneseCity);
 
     List<JapaneseCityDto> japaneseCityListToJapaneseCityDtoList(List<JapaneseCity> japaneseCity);
+
 }

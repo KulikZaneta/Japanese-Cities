@@ -24,7 +24,7 @@ public class AttractionController {
     }
 
     @PutMapping
-    public AttractionDto saveAndUpdateAttraction(@RequestBody AttractionDto attractionDto) {
+    public AttractionDto updateAttraction(@RequestBody AttractionDto attractionDto) {
         return attractionMapper.attractionToAttractionDto(attractionService.update(attractionMapper.attractionDtoToAttraction(attractionDto), attractionDto.getCityId()));
     }
 
@@ -42,6 +42,7 @@ public class AttractionController {
         Page<AttractionDto> map = page1.map(attractionMapper::attractionToAttractionDto);
         return map;
     }
+
 
     @GetMapping("/{id}")
     public AttractionDto getAttractionById(@PathVariable Long id) {

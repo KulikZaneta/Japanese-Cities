@@ -24,6 +24,6 @@ public class JapaneseCity {
 
     private String description;
 
-    @OneToMany(mappedBy = "japaneseCity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToMany(mappedBy = "japaneseCity", cascade = CascadeType.ALL)
     private List<Attraction> attractions;
 }

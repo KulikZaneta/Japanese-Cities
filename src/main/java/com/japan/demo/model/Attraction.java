@@ -3,6 +3,7 @@ package com.japan.demo.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -19,8 +20,8 @@ public class Attraction {
 
     private String url;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private JapaneseCity japaneseCity;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<JapaneseCity> japaneseCity;
 
 
 }

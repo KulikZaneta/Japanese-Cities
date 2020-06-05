@@ -5,10 +5,12 @@ import com.japan.demo.model.Attraction;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface AttractionService {
-    Attraction save(Attraction attraction, Long cityId);
+import java.util.List;
 
-    Attraction update(Attraction attraction, Long cityId);
+public interface AttractionService {
+    Attraction save(Attraction attraction, List<Long> cityId);
+
+    Attraction update(Attraction attraction, List<Long> cityId);
 
     void delete(Long id);
 

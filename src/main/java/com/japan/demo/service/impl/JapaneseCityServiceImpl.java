@@ -53,4 +53,9 @@ public class JapaneseCityServiceImpl implements JapaneseCityService {
     public List<String> autoCompleteByName(String name) {
         return repository.autoCompleteByName(name);
     }
+
+    @Override
+    public List<JapaneseCityRepository.JapaneseCitySelect> getIdAndName() {
+        return repository.getIdAndName();
+    }
 }

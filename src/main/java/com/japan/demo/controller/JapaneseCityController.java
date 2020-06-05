@@ -1,7 +1,9 @@
 package com.japan.demo.controller;
 
 import com.japan.demo.mapper.JapaneseCityMapper;
+import com.japan.demo.model.JapaneseCity;
 import com.japan.demo.model.dto.JapaneseCityDto;
+import com.japan.demo.repository.JapaneseCityRepository;
 import com.japan.demo.service.JapaneseCityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -52,5 +54,10 @@ public class JapaneseCityController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCity(@PathVariable Long id) {
             service.deleteById(id);
+    }
+
+    @GetMapping("/select")
+    public List<JapaneseCityRepository.JapaneseCitySelect> getIdAndName() {
+        return service.getIdAndName();
     }
 }

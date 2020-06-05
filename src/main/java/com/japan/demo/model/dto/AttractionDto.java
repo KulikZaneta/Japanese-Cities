@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @Data
 @NoArgsConstructor
@@ -19,5 +21,5 @@ public class AttractionDto {
 
     private String url;
 
-    private Long cityId;
+    private List<Long> cityId;
 }
