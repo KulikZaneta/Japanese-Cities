@@ -18,9 +18,9 @@ public interface JapaneseCityRepository extends JpaRepository<JapaneseCity, Long
     List<JapaneseCitySelect> getIdAndName();
 
     interface JapaneseCitySelect {
-       Long getId();
-       String getName();
+        Long getId();
 
+        String getName();
     }
 
     Set<JapaneseCity> findByIdIn(List<Long> cityId);
