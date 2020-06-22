@@ -28,21 +28,17 @@ public class AttractionController {
         return attractionMapper.attractionToAttractionDto(attractionService.update(attractionMapper.attractionDtoToAttraction(attractionDto), attractionDto.getCityId()));
     }
 
-
     @DeleteMapping("/{id}")
     public void deleteAttraction(@PathVariable Long id) {
         attractionService.delete(id);
     }
 
-
     @GetMapping
     public Page<AttractionDto> getAttractionPage(@RequestParam Integer page, @RequestParam Integer size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<Attraction> page1 = attractionService.getPage(pageable);
-        Page<AttractionDto> map = page1.map(attractionMapper::attractionToAttractionDto);
-        return map;
+        Page<Attraction> attractionPage = attractionService.getPage(pageable);
+        return attractionPage.map(attractionMapper::attractionToAttractionDto);
     }
-
 
     @GetMapping("/{id}")
     public AttractionDto getAttractionById(@PathVariable Long id) {

@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class AttractionServiceImpl implements AttractionService {
+
     private final AttractionRepository attractionRepository;
     private final JapaneseCityRepository japaneseCityRepository;
 
@@ -33,14 +33,14 @@ public class AttractionServiceImpl implements AttractionService {
     @Override
     public Attraction update(Attraction attraction, List<Long> cityId) {
         if (attraction.getId() != null) {
-             return save(attraction, cityId);
-        } throw new  EntityNotFoundException("Japanese city with " + cityId + "doesn't exist");
+            return save(attraction, cityId);
+        }
+        throw new EntityNotFoundException("Japanese city with " + cityId + "doesn't exist");
     }
 
     @Override
     public void delete(Long id) {
         attractionRepository.deleteById(id);
-
     }
 
     @Override

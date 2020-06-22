@@ -21,7 +21,6 @@ public class Attraction {
     private String url;
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
     private Set<JapaneseCity> japaneseCity;
-
-
 }

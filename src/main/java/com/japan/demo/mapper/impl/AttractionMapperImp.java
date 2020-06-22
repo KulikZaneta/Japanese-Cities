@@ -4,6 +4,7 @@ import com.japan.demo.mapper.AttractionMapper;
 import com.japan.demo.model.Attraction;
 import com.japan.demo.model.dto.AttractionDto;
 import org.springframework.stereotype.Component;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
