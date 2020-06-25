@@ -30,6 +30,7 @@ public class AttractionServiceImpl implements AttractionService {
         return attractionRepository.save(attraction);
     }
 
+    @Transactional
     @Override
     public Attraction update(Attraction attraction, List<Long> cityId) {
         if (attraction.getId() != null) {

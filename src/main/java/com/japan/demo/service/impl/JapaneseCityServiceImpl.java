@@ -49,6 +49,7 @@ public class JapaneseCityServiceImpl implements JapaneseCityService {
         return japaneseCityRepository.save(japaneseCities);
     }
 
+    @Transactional
     @Override
     public JapaneseCity update(JapaneseCity japaneseCity, List<Attraction> attractions) {
         if (japaneseCity != null) {
