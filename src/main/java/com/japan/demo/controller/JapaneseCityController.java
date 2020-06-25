@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,17 +42,20 @@ public class JapaneseCityController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("isAuthenticated()")
     public JapaneseCityDto addCity(@RequestBody JapaneseCityDto japaneseCityDto) {
         return mapper.japaneseCityToJapaneseCityDto(service.save(mapper.japaneseCityDtoToJapaneseCity(japaneseCityDto), attractionMapper.attractionListDtoToAttractionList(japaneseCityDto.getAttractions())));
     }
 
     @PutMapping
+    @PreAuthorize(("isAuthenticated()"))
     public JapaneseCityDto updateCity(@RequestBody JapaneseCityDto japaneseCityDto) {
         return mapper.japaneseCityToJapaneseCityDto(service.update(mapper.japaneseCityDtoToJapaneseCity(japaneseCityDto), attractionMapper.attractionListDtoToAttractionList(japaneseCityDto.getAttractions())));
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize(("isAuthenticated()"))
     public void deleteCity(@PathVariable Long id) {
         service.deleteById(id);
     }
