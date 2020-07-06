@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
 
-    @Value("${security.jwt.token.secret-key:secretKey}")
+    @Value("${security.jwt.token.secret-key}")
     private String secretKey;
 
 
@@ -35,6 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager(), secretKey))
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(), secretKey))
                 .exceptionHandling()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

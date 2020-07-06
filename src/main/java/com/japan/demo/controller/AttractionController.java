@@ -20,19 +20,19 @@ public class AttractionController {
     private final AttractionMapper attractionMapper;
 
     @PostMapping
-    @PreAuthorize(("isAuthenticated()"))
+    @PreAuthorize("isAuthenticated()")
     public AttractionDto saveAttraction(@RequestBody AttractionDto attractionDto) {
         return attractionMapper.attractionToAttractionDto(attractionService.save(attractionMapper.attractionDtoToAttraction(attractionDto), attractionDto.getCityId()));
     }
 
     @PutMapping
-    @PreAuthorize(("isAuthenticated()"))
+    @PreAuthorize("isAuthenticated()")
     public AttractionDto updateAttraction(@RequestBody AttractionDto attractionDto) {
         return attractionMapper.attractionToAttractionDto(attractionService.update(attractionMapper.attractionDtoToAttraction(attractionDto), attractionDto.getCityId()));
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize(("isAuthenticated()"))
+    @PreAuthorize("isAuthenticated()")
     public void deleteAttraction(@PathVariable Long id) {
         attractionService.delete(id);
     }

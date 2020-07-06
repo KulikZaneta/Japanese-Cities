@@ -48,14 +48,14 @@ public class JapaneseCityController {
     }
 
     @PutMapping
-    @PreAuthorize(("isAuthenticated()"))
+    @PreAuthorize("isAuthenticated()")
     public JapaneseCityDto updateCity(@RequestBody JapaneseCityDto japaneseCityDto) {
         return mapper.japaneseCityToJapaneseCityDto(service.update(mapper.japaneseCityDtoToJapaneseCity(japaneseCityDto), attractionMapper.attractionListDtoToAttractionList(japaneseCityDto.getAttractions())));
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PreAuthorize(("isAuthenticated()"))
+    @PreAuthorize("isAuthenticated()")
     public void deleteCity(@PathVariable Long id) {
         service.deleteById(id);
     }

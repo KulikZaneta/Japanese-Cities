@@ -1,6 +1,7 @@
 package com.japan.demo.security;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Collections;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +21,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username)
-                .map(user -> new User(username, user.getPassword(), Collections.emptySet()))
+                .map(user -> new User(username, user.getPassword(), user.getRoles().stream()
+                        .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .collect(Collectors.toSet())))
                 .orElseThrow(() -> new UsernameNotFoundException(username));
     }
 }
