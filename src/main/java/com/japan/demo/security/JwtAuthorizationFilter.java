@@ -1,9 +1,12 @@
 package com.japan.demo.security;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -13,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JwtAuthorizationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -39,6 +44,21 @@ public class JwtAuthorizationFilter extends UsernamePasswordAuthenticationFilter
                 .signWith(SignatureAlgorithm.HS512, secretKey)
                 .compact();
 
-        response.addHeader(TOKEN_HEADER, TOKEN_PREFIX + token);
+       Map<String, String> responseBody = new HashMap<>();
+       responseBody.put("token", token);
+       new ObjectMapper().writeValue(response.getWriter(), responseBody);
     }
+
+    @Override
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+        Map body = new HashMap<>();
+
+        try {
+            body = new ObjectMapper().readValue(request.getInputStream(), HashMap.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(body.get("username"), body.get("password")));
+    }
+
 }
