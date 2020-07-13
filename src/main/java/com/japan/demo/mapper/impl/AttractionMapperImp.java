@@ -30,9 +30,9 @@ public class AttractionMapperImp implements AttractionMapper {
     }
 
     @Override
-    public List<Attraction> attractionListDtoToAttractionList(List<AttractionDto> attractionDtos) {
-        if (attractionDtos != null) {
-            return attractionDtos.stream()
+    public List<Attraction> attractionListDtoToAttractionList(List<AttractionDto> attractionDto) {
+        if (attractionDto != null) {
+            return attractionDto.stream()
                     .map(this::attractionDtoToAttraction)
                     .collect(Collectors.toList());
         }

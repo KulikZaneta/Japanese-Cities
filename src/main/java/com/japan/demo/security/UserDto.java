@@ -1,31 +1,26 @@
 package com.japan.demo.security;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Builder
-public class User {
-
-    @Id
-    @GeneratedValue
+public class UserDto {
     private Long id;
 
-    @Column(unique = true)
     private String username;
 
     private String password;
 
-    @ManyToMany
-    private Set<Role> roles;
+    private Set<String> roles;
 
     private String email;
 }
