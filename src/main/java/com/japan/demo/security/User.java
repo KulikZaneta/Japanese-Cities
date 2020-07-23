@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -27,5 +28,6 @@ public class User {
     @ManyToMany
     private Set<Role> roles;
 
+    @NotNull
     private String email;
 }

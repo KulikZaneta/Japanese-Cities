@@ -5,9 +5,13 @@ import com.japan.demo.security.User;
 import com.japan.demo.security.UserRepository;
 import com.japan.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Collections;
 
 @Service
@@ -25,5 +29,15 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         roleRepository.findByName("ROLE_USER").ifPresent(role -> user.setRoles(Collections.singleton(role)));
         return userRepository.save(user);
+    }
+
+    @Override
+    public Page<User> getPage(Pageable pageable) {
+        return userRepository.findAll(pageable);
+    }
+
+    @Override
+    public User findByCurrentUser() {
+        return userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow(() -> new EntityNotFoundException("Username not found"));
     }
 }
