@@ -21,10 +21,6 @@ import java.util.Map;
 
 public class JwtAuthorizationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private static final String TOKEN_HEADER = "Authorization";
-
-    private static final String TOKEN_PREFIX = "Bearer ";
-
     private static final long EXPIRATION_TIME = 300000;
 
     private final String secretKey;

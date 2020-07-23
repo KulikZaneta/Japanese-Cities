@@ -34,11 +34,6 @@ public class JapaneseCityServiceImpl implements JapaneseCityService {
         return japaneseCityRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("City with " + id + "doesn't exist"));
     }
 
-    @Override
-    public List<JapaneseCity> findAll() {
-        return japaneseCityRepository.findAll();
-    }
-
     @Transactional
     @Override
     public JapaneseCity save(JapaneseCity japaneseCities, List<Attraction> attractions) {

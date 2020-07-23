@@ -13,8 +13,6 @@ public interface JapaneseCityService {
 
     JapaneseCity findById(Long id);
 
-    List<JapaneseCity> findAll();
-
     JapaneseCity save(JapaneseCity japaneseCities, List<Attraction> attractions);
 
     JapaneseCity update(JapaneseCity japaneseCity, List<Attraction> attractions);
