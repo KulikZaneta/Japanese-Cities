@@ -24,7 +24,7 @@ public class UserController {
 
     @GetMapping()
     @PreAuthorize("hasRole('ADMIN')")
-    public Page<UserDto> page(@RequestParam int page, @RequestParam int size) {
+    public Page<UserDto> getUserPage(@RequestParam int page, @RequestParam int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<User> userPage = userService.getPage(pageable);
         return userPage.map(userMapper::userToUserDto);
