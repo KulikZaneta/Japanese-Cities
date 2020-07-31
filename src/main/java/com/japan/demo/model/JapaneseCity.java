@@ -3,6 +3,7 @@ package com.japan.demo.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -11,7 +12,7 @@ import java.util.List;
 @Data
 @ToString
 @Builder
-public class JapaneseCity {
+public class JapaneseCity implements Serializable {
     @Id
     @GeneratedValue
     private Long id;

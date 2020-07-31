@@ -7,6 +7,9 @@ import com.japan.demo.repository.JapaneseCityRepository;
 import com.japan.demo.service.JapaneseCityService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -25,17 +28,20 @@ public class JapaneseCityServiceImpl implements JapaneseCityService {
     private final AttractionRepository attractionRepository;
 
     @Override
+    @Cacheable(value = "mapCity", key = "#name")
     public JapaneseCity findByName(String name) {
         return japaneseCityRepository.findByName(name);
     }
 
     @Override
+    @Cacheable(value = "mapCity", key = "#id")
     public JapaneseCity findById(Long id) {
         return japaneseCityRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("City with " + id + "doesn't exist"));
     }
 
     @Transactional
     @Override
+    @CachePut(value = "mapCity", key = "#result.id")
     public JapaneseCity save(JapaneseCity japaneseCities, List<Attraction> attractions) {
         attractions.forEach(attraction ->
                 attraction.setJapaneseCity(Collections.singleton(japaneseCities)));
@@ -46,6 +52,7 @@ public class JapaneseCityServiceImpl implements JapaneseCityService {
 
     @Transactional
     @Override
+    @CachePut(value = "mapCity", key = "#result.id")
     public JapaneseCity update(JapaneseCity japaneseCity, List<Attraction> attractions) {
         if (japaneseCity != null) {
             return save(japaneseCity, attractions);
@@ -54,6 +61,7 @@ public class JapaneseCityServiceImpl implements JapaneseCityService {
     }
 
     @Override
+    @CacheEvict(value = "mapCity", key = "#result.id")
     public void deleteById(Long id) {
         japaneseCityRepository.deleteById(id);
     }
