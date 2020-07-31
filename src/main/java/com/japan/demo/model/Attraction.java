@@ -3,6 +3,7 @@ package com.japan.demo.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
@@ -11,7 +12,7 @@ import java.util.Set;
 @Data
 @ToString
 @Builder
-public class Attraction {
+public class Attraction implements Serializable {
     @Id
     @GeneratedValue
     private Long id;

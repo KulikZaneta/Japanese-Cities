@@ -17,6 +17,14 @@ public class HazelcastConfig {
                                 .setEvictionPolicy(EvictionPolicy.LFU)
                                 .setSize(1000)
                                 .setMaxSizePolicy(MaxSizePolicy.FREE_NATIVE_MEMORY_SIZE))
+                        .setTimeToLiveSeconds(10000))
+                .setInstanceName("attractions")
+                .addMapConfig(new MapConfig()
+                        .setName("mapAttractions")
+                        .setEvictionConfig(new EvictionConfig()
+                                .setEvictionPolicy(EvictionPolicy.LFU)
+                                .setSize(1000)
+                                .setMaxSizePolicy(MaxSizePolicy.FREE_NATIVE_MEMORY_SIZE))
                         .setTimeToLiveSeconds(10000));
     }
 }
