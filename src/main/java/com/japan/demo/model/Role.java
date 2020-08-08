@@ -1,4 +1,4 @@
-package com.japan.demo.security;
+package com.japan.demo.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

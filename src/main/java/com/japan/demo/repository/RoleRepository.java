@@ -1,6 +1,6 @@
 package com.japan.demo.repository;
 
-import com.japan.demo.security.Role;
+import com.japan.demo.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

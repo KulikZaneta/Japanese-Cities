@@ -1,5 +1,7 @@
-package com.japan.demo.security;
+package com.japan.demo.config;
 
+import com.japan.demo.security.JwtAuthenticationFilter;
+import com.japan.demo.security.JwtAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +26,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${security.jwt.token.secret-key}")
     private String secretKey;
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

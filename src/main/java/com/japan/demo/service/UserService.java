@@ -1,6 +1,6 @@
 package com.japan.demo.service;
 
-import com.japan.demo.security.User;
+import com.japan.demo.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

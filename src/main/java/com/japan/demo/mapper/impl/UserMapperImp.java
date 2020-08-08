@@ -1,9 +1,9 @@
 package com.japan.demo.mapper.impl;
 
 import com.japan.demo.mapper.UserMapper;
-import com.japan.demo.security.Role;
-import com.japan.demo.security.User;
-import com.japan.demo.security.UserDto;
+import com.japan.demo.model.Role;
+import com.japan.demo.model.User;
+import com.japan.demo.model.dto.UserDto;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;

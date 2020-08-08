@@ -1,4 +1,4 @@
-package com.japan.demo.security;
+package com.japan.demo.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

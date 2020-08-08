@@ -1,8 +1,8 @@
 package com.japan.demo.service.impl;
 
 import com.japan.demo.repository.RoleRepository;
-import com.japan.demo.security.User;
-import com.japan.demo.security.UserRepository;
+import com.japan.demo.model.User;
+import com.japan.demo.repository.UserRepository;
 import com.japan.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

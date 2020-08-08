@@ -1,7 +1,7 @@
 package com.japan.demo.config;
 
 import com.japan.demo.repository.RoleRepository;
-import com.japan.demo.security.Role;
+import com.japan.demo.model.Role;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

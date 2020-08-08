@@ -1,5 +1,6 @@
 package com.japan.demo.security;
 
+import com.japan.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -23,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return userRepository.findByUsername(username)
                 .map(user -> new User(username, user.getPassword(), user.getRoles().stream()
                         .map(role -> new SimpleGrantedAuthority(role.getName()))
-                .collect(Collectors.toSet())))
+                        .collect(Collectors.toSet())))
                 .orElseThrow(() -> new UsernameNotFoundException(username));
     }
 }
