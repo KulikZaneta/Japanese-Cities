@@ -25,6 +25,6 @@ public class JapaneseCity implements Serializable {
 
     private String description;
 
-    @ManyToMany(mappedBy = "japaneseCity", cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "japaneseCity", cascade = CascadeType.ALL)
     private List<Attraction> attractions;
 }
