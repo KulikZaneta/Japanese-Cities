@@ -3,11 +3,12 @@ package com.japan.demo.security;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -18,10 +19,11 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class JwtAuthorizationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private static final long EXPIRATION_TIME = 300000;
+    private static final long EXPIRATION_TIME = 864_000_000;
 
     private final String secretKey;
 
@@ -29,20 +31,6 @@ public class JwtAuthorizationFilter extends UsernamePasswordAuthenticationFilter
     public JwtAuthorizationFilter(AuthenticationManager authenticationManager, String secretKey) {
         setAuthenticationManager(authenticationManager);
         this.secretKey = secretKey;
-    }
-
-    @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        UserDetails principal = (UserDetails) authResult.getPrincipal();
-        String token = Jwts.builder()
-                .setSubject(principal.getUsername())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.HS512, secretKey)
-                .compact();
-
-       Map<String, String> responseBody = new HashMap<>();
-       responseBody.put("token", token);
-       new ObjectMapper().writeValue(response.getWriter(), responseBody);
     }
 
     @Override
@@ -55,6 +43,24 @@ public class JwtAuthorizationFilter extends UsernamePasswordAuthenticationFilter
             e.printStackTrace();
         }
         return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(body.get("username"), body.get("password")));
+    }
+
+    @Override
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+        String token = Jwts.builder()
+                .setSubject(authResult.getName())
+                .claim("authorities", authResult.getAuthorities().stream()
+                        .map(GrantedAuthority::getAuthority)
+                        .collect(Collectors.joining(",")))
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .signWith(SignatureAlgorithm.HS512, secretKey)
+                .compact();
+
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+
+        Map<String, String> responseBody = new HashMap<>();
+        responseBody.put("token", token);
+        new ObjectMapper().writeValue(response.getWriter(), responseBody);
     }
 
 }
