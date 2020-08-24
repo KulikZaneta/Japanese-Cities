@@ -41,7 +41,7 @@ public class AttractionServiceImpl implements AttractionService {
         if (attraction.getId() != null) {
             return save(attraction, cityId);
         }
-        throw new EntityNotFoundException("Japanese city with " + cityId + "doesn't exist");
+        throw new EntityNotFoundException("Attraction doesn't exist");
     }
 
     @Override
