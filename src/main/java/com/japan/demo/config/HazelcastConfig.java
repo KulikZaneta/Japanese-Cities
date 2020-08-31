@@ -18,7 +18,6 @@ public class HazelcastConfig {
                                 .setSize(1000)
                                 .setMaxSizePolicy(MaxSizePolicy.USED_HEAP_SIZE))
                         .setTimeToLiveSeconds(10000))
-                .setInstanceName("attractions")
                 .addMapConfig(new MapConfig()
                         .setName("mapAttractions")
                         .setEvictionConfig(new EvictionConfig()

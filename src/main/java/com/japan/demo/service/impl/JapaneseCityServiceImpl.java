@@ -28,20 +28,20 @@ public class JapaneseCityServiceImpl implements JapaneseCityService {
     private final AttractionRepository attractionRepository;
 
     @Override
-    @Cacheable(value = "mapCity", key = "#name")
+    @Cacheable(cacheNames = "mapCity", key = "#name")
     public JapaneseCity findByName(String name) {
         return japaneseCityRepository.findByName(name);
     }
 
     @Override
-    @Cacheable(value = "mapCity", key = "#id")
+    @Cacheable(cacheNames = "mapCity", key = "#id")
     public JapaneseCity findById(Long id) {
         return japaneseCityRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("City with " + id + "doesn't exist"));
     }
 
     @Transactional
     @Override
-    @CachePut(value = "mapCity", key = "#result.id")
+    @CachePut(cacheNames = "mapCity", key = "#result.id")
     public JapaneseCity save(JapaneseCity japaneseCities, List<Attraction> attractions) {
         attractions.forEach(attraction ->
                 attraction.setJapaneseCity(Collections.singleton(japaneseCities)));
@@ -52,7 +52,7 @@ public class JapaneseCityServiceImpl implements JapaneseCityService {
 
     @Transactional
     @Override
-    @CachePut(value = "mapCity", key = "#result.id")
+    @CachePut(cacheNames = "mapCity", key = "#result.id")
     public JapaneseCity update(JapaneseCity japaneseCity, List<Attraction> attractions) {
         if (japaneseCity != null) {
             return save(japaneseCity, attractions);
@@ -61,7 +61,7 @@ public class JapaneseCityServiceImpl implements JapaneseCityService {
     }
 
     @Override
-    @CacheEvict(value = "mapCity", key = "#result.id")
+    @CacheEvict(cacheNames = "mapCity", key = "#result.id")
     public void deleteById(Long id) {
         japaneseCityRepository.deleteById(id);
     }
