@@ -55,7 +55,17 @@ public class JapaneseCityServiceImpl implements JapaneseCityService {
     @CachePut(cacheNames = "mapCity", key = "#result.id")
     public JapaneseCity update(JapaneseCity japaneseCity, List<Attraction> attractions) {
         if (japaneseCity != null) {
-            return save(japaneseCity, attractions);
+            JapaneseCity byId = this.findById(japaneseCity.getId());
+            byId.setArea(japaneseCity.getArea());
+            byId.setDescription(japaneseCity.getDescription());
+            byId.setName(japaneseCity.getName());
+            byId.setPopulation(japaneseCity.getPopulation());
+            byId.getAttractions().addAll(attractions);
+
+            attractions.forEach(attraction -> { attraction.setJapaneseCity(Collections.singleton(japaneseCity));
+            });
+
+            return japaneseCityRepository.save(byId);
         }
         throw new EntityNotFoundException("City doesn't exist");
     }

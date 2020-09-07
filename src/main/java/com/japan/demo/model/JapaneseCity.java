@@ -10,7 +10,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@ToString
 @Builder
 public class JapaneseCity implements Serializable {
     @Id
@@ -25,6 +24,7 @@ public class JapaneseCity implements Serializable {
 
     private String description;
 
+    @ToString.Exclude
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "japaneseCity", cascade = CascadeType.ALL)
     private List<Attraction> attractions;
 }
