@@ -45,7 +45,7 @@ public class AttractionServiceImpl implements AttractionService {
     }
 
     @Override
-    @CacheEvict(cacheNames = "mapAttractions", key = "#result.id")
+    @CacheEvict(cacheNames = "mapAttractions", key = "#id")
     public void delete(Long id) {
         attractionRepository.deleteById(id);
     }

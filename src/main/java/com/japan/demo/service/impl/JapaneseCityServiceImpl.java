@@ -71,7 +71,7 @@ public class JapaneseCityServiceImpl implements JapaneseCityService {
     }
 
     @Override
-    @CacheEvict(cacheNames = "mapCity", key = "#result.id")
+    @CacheEvict(cacheNames = "mapCity", key = "#id")
     public void deleteById(Long id) {
         japaneseCityRepository.deleteById(id);
     }
