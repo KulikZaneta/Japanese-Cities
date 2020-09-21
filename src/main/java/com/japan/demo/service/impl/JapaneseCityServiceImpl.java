@@ -62,8 +62,7 @@ public class JapaneseCityServiceImpl implements JapaneseCityService {
             byId.setPopulation(japaneseCity.getPopulation());
             byId.getAttractions().addAll(attractions);
 
-            attractions.forEach(attraction -> { attraction.setJapaneseCity(Collections.singleton(japaneseCity));
-            });
+            attractions.forEach(attraction -> attraction.setJapaneseCity(Collections.singleton(japaneseCity)));
 
             return japaneseCityRepository.save(byId);
         }

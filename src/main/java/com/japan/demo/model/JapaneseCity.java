@@ -22,6 +22,7 @@ public class JapaneseCity implements Serializable {
 
     private String area;
 
+    @Column(length = 10_000)
     private String description;
 
     @ToString.Exclude

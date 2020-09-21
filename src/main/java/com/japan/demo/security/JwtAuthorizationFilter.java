@@ -3,11 +3,11 @@ package com.japan.demo.security;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class JwtAuthorizationFilter extends UsernamePasswordAuthenticationFilter {
 
     private static final long EXPIRATION_TIME = 864_000_000;
@@ -34,13 +35,13 @@ public class JwtAuthorizationFilter extends UsernamePasswordAuthenticationFilter
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
         Map body = new HashMap<>();
 
         try {
             body = new ObjectMapper().readValue(request.getInputStream(), HashMap.class);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
         return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(body.get("username"), body.get("password")));
     }

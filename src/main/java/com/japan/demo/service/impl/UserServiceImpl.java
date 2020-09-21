@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByCurrentUser() {
-        return userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow(() -> new EntityNotFoundException("Username not found"));
+        return userRepository.findByUsername(SecurityContextHolder.getContext()
+                .getAuthentication().getName()).orElseThrow(() -> new EntityNotFoundException("Username not found"));
     }
 }
