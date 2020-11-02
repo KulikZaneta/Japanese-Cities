@@ -10,7 +10,7 @@ The application is based on the REST API architecture.
 Application available on AWS.
 
 ## DEMO
-http://japancities.s3-website.eu-west-2.amazonaws.com/city-list
+http://japancities.s3-website.eu-west-2.amazonaws.com
 
 
 ## Technologies
