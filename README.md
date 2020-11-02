@@ -7,7 +7,11 @@ Logged in users can add, update and delete cities and attractions.
 
 The application is based on the REST API architecture.
 
-Project in the development process. 
+Application available on AWS.
+
+## DEMO
+http://japancities.s3-website.eu-west-2.amazonaws.com/city-list
+
 
 ## Technologies
 * Java 8
